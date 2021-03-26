@@ -26,6 +26,11 @@
     <%= form.number_field :stock %>
   </div>
 
+  <div class="field">
+    <%= form.label :category %>
+    <%= form.collection_select(:category_ids,Category.all,:id,:name, {}, {multiple: true})%>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>

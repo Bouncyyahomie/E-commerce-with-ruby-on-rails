@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :product_categories
+  resources :categories
   devise_for :admins
   root 'products#index'
   resources :products
