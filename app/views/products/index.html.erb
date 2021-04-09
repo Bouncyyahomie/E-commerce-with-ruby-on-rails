@@ -2,10 +2,13 @@
 
 <h1>Products</h1>
 
-<table>
+<%= link_to 'Download CSV', products_path(format: :csv) %>
+
+<table class="table table-hover">
   <thead>
     <tr>
       <th>Title</th>
+      <th>Status</th>
       <th>Description</th>
       <th>Stock</th>
       <th>Category</th>
@@ -17,6 +20,7 @@
     <% @products.each do |product| %>
       <tr>
         <td><%= product.title %></td>
+        <td><%= product.status %></td>
         <td><%= product.description %></td>
         <td><%= product.stock %></td>
         <td><%= product.categories.empty? ? 'NA' : product.categories.map(&:name).join(', ') %></td>
@@ -33,3 +37,10 @@
 <%= link_to 'New Product', new_product_path %>
 <br>
 <%= link_to 'New Category', new_category_path %>
+
+<br>
+
+<%= form_tag products_csv_upload_path, multipart: true do %>
+  <%= file_field_tag :csv_file, class: 'file-input' %>
+  <%= submit_tag :upload, class: 'button'%>
+<% end %>
