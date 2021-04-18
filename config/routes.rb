@@ -7,8 +7,11 @@ Rails.application.routes.draw do
     namespace :products do
       post 'csv_upload'
     end
-    resources :categories
+  end
+
+  namespace :admins do
     resources :products
+    resources :categories
   end
 
 end
