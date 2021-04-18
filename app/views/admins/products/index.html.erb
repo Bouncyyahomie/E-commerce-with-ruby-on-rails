@@ -2,11 +2,12 @@
 
 <h1>Products</h1>
 
-<%= link_to 'Download CSV', products_path(format: :csv) %>
+<%= link_to 'Download CSV', admins_products_path(format: :csv) %>
 
 <table class="table table-hover">
   <thead>
     <tr>
+      <th>Primary Image</th>
       <th>Title</th>
       <th>Status</th>
       <th>Description</th>
@@ -19,14 +20,18 @@
   <tbody>
     <% @products.each do |product| %>
       <tr>
+        <td> <% if product.primary_image.attached? %>
+                <%= image_tag product.primary_image, class: "img-thumbnail", style: "max-height: 10rem;"%> 
+                  <% end %>
+        </td>
         <td><%= product.title %></td>
         <td><%= product.status %></td>
         <td><%= product.description %></td>
         <td><%= product.stock %></td>
         <td><%= product.categories.empty? ? 'NA' : product.categories.map(&:name).join(', ') %></td>
-        <td><%= link_to 'Show', product %></td>
-        <td><%= link_to 'Edit', edit_product_path(product) %></td>
-        <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', admins_product_path(product) %></td>
+        <td><%= link_to 'Edit', edit_admins_product_path(product) %></td>
+        <td><%= link_to 'Destroy', admins_product_path(product), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -34,13 +39,13 @@
 
 <br>
 
-<%= link_to 'New Product', new_product_path %>
+<%= link_to 'New Product', new_admins_product_path %>
 <br>
-<%= link_to 'New Category', new_category_path %>
+<%= link_to 'New Category', new_admins_category_path %>
 
 <br>
 
-<%= form_tag products_csv_upload_path, multipart: true do %>
+<%= form_tag admins_products_csv_upload_path, multipart: true do %>
   <%= file_field_tag :csv_file, class: 'file-input' %>
   <%= submit_tag :upload, class: 'button'%>
 <% end %>

@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<% if @product.primary_image.attached? %>
+                <%= image_tag @product.primary_image, class: "img-thumbnail", style: "max-height: 10rem;"%> 
+                  <% end %>
+
+<p>
+  <strong>Title:</strong>
+  <%= @product.title %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @product.status %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @product.description %>
+</p>
+
+<p>
+  <strong>Stock:</strong>
+  <%= @product.stock %>
+</p>
+
+<% if @product.images.attached? %>
+    <% @product.images.each do |img| %>
+        <%= image_tag img, class: "img-thumbnail", style: "max-height: 10rem;" %>
+        <%= link_to 'Remove', '/admins/products/delete_image/' + @product.primary_image.id.to_s  %>
+    <% end %>
+<% end %>
+
+<%= link_to 'Edit', edit_admins_product_path(@product) %> |
+<%= link_to 'Back', admins_products_path(@product) %>

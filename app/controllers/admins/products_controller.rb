@@ -1,4 +1,4 @@
-class ProductsController < ApplicationController
+class Admins:: ProductsController < ApplicationController
   before_action :set_product, only: %i[ show edit update destroy ]
   before_action :authenticate_admin!, except: [:index, :show]
   
@@ -7,13 +7,14 @@ class ProductsController < ApplicationController
     @products = Product.all
 
     respond_to do |format|
-      format.html
+      format.html {}
       format.csv { send_data generate_csv(Product.all), file_name: 'product.csv' }
     end
   end
 
   # GET /products/1 or /products/1.json
   def show
+    @products = Product.find(params[:id])
   end
 
   # GET /products/new
@@ -33,7 +34,7 @@ class ProductsController < ApplicationController
 
     respond_to do |format|
       if @product.save
-        format.html { redirect_to @product, notice: "Product was successfully created." }
+        format.html { redirect_to admins_product_path(@product), notice: "Product was successfully created." }
         format.json { render :show, status: :created, location: @product }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -59,7 +60,7 @@ class ProductsController < ApplicationController
   def destroy
     @product.destroy
     respond_to do |format|
-      format.html { redirect_to products_url, notice: "Product was successfully destroyed." }
+      format.html { redirect_to admins_products_path, notice: "Product was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -73,6 +74,11 @@ class ProductsController < ApplicationController
     redirect_to action: :index
   end
 
+  def delete_image
+    image = ActiveStorage::Attachment.find(params[:id])
+    image.purge
+    redirect_to action: :index
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -82,7 +88,7 @@ class ProductsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def product_params
-      params.require(:product).permit(:title, :status, :description, :stock, category_ids: [])
+      params.require(:product).permit(:title, :status, :description, :primary_image, :stock, category_ids: [], images: [])
     end
 
     def generate_csv(products)

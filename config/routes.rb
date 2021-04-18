@@ -1,12 +1,14 @@
 Rails.application.routes.draw do
-  resources :product_categories
-  resources :categories
-  resources :products
   devise_for :admins
-  root 'products#index'
-
-  namespace :products do
-    post 'csv_upload'
+  root 'admins/products#index'
+  match "/admins/products/delete_image/:id" => "admins/products#delete_image", via: :get
+  
+  namespace :admins do
+    namespace :products do
+      post 'csv_upload'
+    end
+    resources :categories
+    resources :products
   end
 
 end
