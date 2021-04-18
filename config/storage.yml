@@ -10,7 +10,7 @@ local:
 amazon:
   service: S3
   access_key_id: <%= ENV['AWS_KEY_ID'] %>
-  secret_access_key: <%= ENV['AWS_ACESS_ID'] %>
+  secret_access_key: <%= ENV['AWS_ACCESS_KEY'] %>
   region: ap-southeast-1
   bucket: ssd-2021
 
