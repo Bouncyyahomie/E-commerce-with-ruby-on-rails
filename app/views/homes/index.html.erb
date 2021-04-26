@@ -2,6 +2,12 @@
 
 <h1>Products</h1>
 
+<% if admin_signed_in? %>
+  <%= link_to 'Go to admin mode', admins_products_path %>
+<% end %>
+
+<br>
+<br>
 
 <table class="table table-hover">
   <thead>
