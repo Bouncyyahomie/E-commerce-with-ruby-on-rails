@@ -1,7 +1,7 @@
 module Admins
   class ProductsController < ApplicationController
     before_action :set_product, only: %i[ show edit update destroy ]
-    before_action :authenticate_admin!, except: [:index, :show]
+    before_action :authenticate_admin!
     
     # GET /products or /products.json
     def index

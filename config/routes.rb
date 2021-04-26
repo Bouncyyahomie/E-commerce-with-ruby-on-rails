@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
+  resources :homes, only: [:index, :show]
+  root "homes#index"
+  
   devise_for :admins
-  root 'admins/products#index'
   match "/admins/products/delete_image/:id" => "admins/products#delete_image", via: :get
   
   namespace :admins do
