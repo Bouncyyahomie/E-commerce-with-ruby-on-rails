@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :homes, only: [:index, :show]
+  resources :orders
   root "homes#index"
   
   devise_for :admins
@@ -13,6 +14,7 @@ Rails.application.routes.draw do
   namespace :admins do
     resources :products
     resources :categories
+    resources :orders 
   end
 
 end

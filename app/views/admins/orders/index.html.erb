@@ -1,0 +1,21 @@
+
+<div class="table-container">
+  <table class="table table-hover ">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Product Name</th>
+        <th>Address</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @orders.each do |order| %>
+        <tr>
+          <td><%= order.name %></td>
+          <td><%= order.address %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

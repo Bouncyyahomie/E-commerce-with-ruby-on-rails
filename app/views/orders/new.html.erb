@@ -1,0 +1,18 @@
+<%= form_with model: @order do |form| %>
+    <p class=""> Fill in your information</p>
+
+
+    <%= form.label :name %><br>
+    <%= form.text_field :name %>
+
+    <%= form.label :address %><br>
+    <%= form.text_field :address %>
+
+    </div>
+
+
+    <div class="action">
+        <%= form.submit "Submit" %>
+    </div>
+
+<%end%>

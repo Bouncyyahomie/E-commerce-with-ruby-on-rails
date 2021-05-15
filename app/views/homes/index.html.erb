@@ -27,6 +27,11 @@
         </td>
         <td><%= product.title %></td>
         <td><%= link_to 'Show', home_path(product) %></td>
+        <td>
+          <%= link_to new_order_path, class: "btn btn-info btn-lg" do  %>
+            <span class="glyphicon glyphicon-shopping-cart"></span> BUY
+            <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
